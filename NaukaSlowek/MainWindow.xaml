@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NaukaSlowek"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Nauka Słówek" Height="450" Width="300">
     <Grid>
-        
+        <StackPanel Visibility="Visible" Name="StackLangs">
+            <Label>Wybierz język testu:</Label>
+            <Button Click="Button_Click" Name="ButtonEng">Angielski</Button>
+            <Button Click="Button_Click" Name="ButtonFre">Francuski</Button>
+            <Button Click="Button_Click" Name="ButtonLat">Łaciński</Button>
+        </StackPanel>
+        <StackPanel Visibility="Hidden" Name="StackOptions">
+            <Label Name="LabelLangSelected"></Label>
+            <Label>Co chcesz wykonać:</Label>
+            <Button Click="Button_Create">Utwórz test</Button>
+            <Button Click="Button_Make">Wykonaj test</Button>
+            <Button Click="Button_Back">Powrót</Button>
+        </StackPanel>
     </Grid>
 </Window>
