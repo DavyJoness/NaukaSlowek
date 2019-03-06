@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="Nauka Słówek - Utwórz test" Height="450" Width="800" Closed="Window_Closed">
     <Grid>
-        
+        <DockPanel LastChildFill="True">
+            <DockPanel DockPanel.Dock="Left" Width="350" Margin="10" LastChildFill="True">
+                <DockPanel LastChildFill="True" DockPanel.Dock="Top">
+                    <Label Content="Nazwa testu:" DockPanel.Dock="Left" />
+
+                        <TextBox x:Name="TextBoxTitle" ></TextBox>
+ 
+                </DockPanel>
+                <DataGrid>
+                    
+                </DataGrid>
+            </DockPanel>
+            <StackPanel>
+                
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>
