@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NaukaSlowek
 {
@@ -86,10 +81,13 @@ namespace NaukaSlowek
 
         private void ButtonDeleteWord_Click(object sender, RoutedEventArgs e)
         {
-            int i = GridWords.SelectedIndex;
-            words.RemoveAt(i);
-            GridWords.ItemsSource = null;
-            GridWords.ItemsSource = words;
+            if (words.Count > 0)
+            {
+                int i = GridWords.SelectedIndex;
+                words.RemoveAt(i);
+                GridWords.ItemsSource = null;
+                GridWords.ItemsSource = words;
+            }
         }
 
         private void ButtonSaveTest_Click(object sender, RoutedEventArgs e)
@@ -98,6 +96,12 @@ namespace NaukaSlowek
             if(testName != "")
             {
                 string path = getLangPath() + @"\" + testName + ".csv";
+
+                //if test exists delete
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
 
                 try
                 {
@@ -140,6 +144,40 @@ namespace NaukaSlowek
             }
 
             return "";
+        }
+
+        private void ButtonOpenTest_Click(object sender, RoutedEventArgs e)
+        {
+            SelectTest st = new SelectTest();
+
+            if (st.ShowDialog() == true)
+            {
+                prepareGrid(true);
+                TextBoxTitle.Text = st.selectedTest.Item1;
+
+                loadWords(st.selectedTest.Item2);
+            }
+        }
+
+        private void loadWords(string file)
+        {
+            string path = getLangPath() + @"\" + file;
+            Word word;
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    word = new Word();
+                    word.SimpleWord = line.Split(';')[1];
+                    word.Translate = line.Split(';')[2];
+
+                    words.Add(word);
+                }
+            }
+            GridWords.ItemsSource = null;
+            GridWords.ItemsSource = words;
         }
     }
 }

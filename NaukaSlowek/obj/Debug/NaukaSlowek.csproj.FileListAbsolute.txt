@@ -17,3 +17,5 @@ C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.csproj.Gener
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.csproj.CoreCompileInputs.cache
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.exe
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.pdb
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\SelectTest.g.cs
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\SelectTest.baml
