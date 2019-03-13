@@ -5,23 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NaukaSlowek"
         mc:Ignorable="d"
-        Title="Nauka Słówek - Utwórz test" Height="450" Width="800" Closed="Window_Closed">
+        Title="Nauka Słówek - Utwórz test" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
         <DockPanel LastChildFill="True">
             <DockPanel DockPanel.Dock="Left" Width="350" Margin="10" LastChildFill="True">
                 <DockPanel LastChildFill="True" DockPanel.Dock="Top">
                     <Label Content="Nazwa testu:" DockPanel.Dock="Left" />
-
-                        <TextBox x:Name="TextBoxTitle" ></TextBox>
- 
+                    <TextBox x:Name="TextBoxTitle" Text="Nowy test" ></TextBox>
                 </DockPanel>
-                <DataGrid>
-                    
+                <DataGrid x:Name="GridWords" Margin="0 10 0 0" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False">
+
                 </DataGrid>
             </DockPanel>
-            <StackPanel>
+            <StackPanel Margin="10">
+                <Button x:Name="ButtonNewTest" Click="ButtonNewTest_Click">Nowy test</Button>
+                <Button x:Name="ButtonOpenTest">Otworz test</Button>
+                <Button x:Name="ButtonSaveTest" Click="ButtonSaveTest_Click">Zapisz test</Button>
+
+                <Button x:Name="ButtonDeleteWord" Margin="0 100 0 0" Click="ButtonDeleteWord_Click">Usuń słówko</Button>
                 
             </StackPanel>
+            
         </DockPanel>
     </Grid>
 </Window>
