@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NaukaSlowek"
         mc:Ignorable="d"
-        Title="Nauka Słówek - Test" Height="450" Width="800" Closed="Window_Closed">
+        Title="Nauka Słówek - Test" Height="600" Width="450" Closed="Window_Closed">
     <Grid>
+        <DockPanel LastChildFill="True">
+            <StackPanel x:Name="StackCategory" DockPanel.Dock="Top" Visibility="Hidden">
+               <Label x:Name="LabelCategory" Content="Kategoria zwierzęta"/> 
+            </StackPanel>
+            
+            <Button x:Name="ButtonFinishTest" Content="Zakończ" DockPanel.Dock="Bottom"/>
+            <DataGrid x:Name="WordTestGrid" Height="Auto" />
+        </DockPanel>
         
     </Grid>
 </Window>

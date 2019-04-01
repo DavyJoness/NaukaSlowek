@@ -39,7 +39,7 @@ namespace NaukaSlowek
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             prepareGrid();
-            TextBoxTitle.Focus();
+            //TextBoxTitle.Focus();
         }
 
         private void ButtonNewTest_Click(object sender, RoutedEventArgs e)
@@ -92,7 +92,7 @@ namespace NaukaSlowek
 
         private void ButtonSaveTest_Click(object sender, RoutedEventArgs e)
         {
-            string testName = TextBoxTitle.Text;
+            string testName = "";//TextBoxTitle.Text;
             if(testName != "")
             {
                 string path = getLangPath() + @"\" + testName + ".csv";
@@ -153,7 +153,7 @@ namespace NaukaSlowek
             if (st.ShowDialog() == true)
             {
                 prepareGrid(true);
-                TextBoxTitle.Text = st.selectedTest.Item1;
+                //TextBoxTitle.Text = st.selectedTest.Item1;
 
                 loadWords(st.selectedTest.Item2);
             }

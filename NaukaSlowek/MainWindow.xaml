@@ -16,8 +16,22 @@
         <StackPanel Visibility="Hidden" Name="StackOptions">
             <Label Name="LabelLangSelected"></Label>
             <Label>Co chcesz wykonać:</Label>
-            <Button Click="Button_Create">Utwórz test</Button>
-            <Button Click="Button_Make">Wykonaj test</Button>
+            <Button Click="Button_Create">Lista słówek</Button>
+            <Button Click="Button_Click">Testy</Button>
+            <Button Click="Button_Back">Powrót</Button>
+        </StackPanel>
+        <StackPanel Visibility="Hidden" Name="StackTests">
+            <Label Name="LabelLangSelected2"></Label>
+            <Button Click="Button_Click">Nowy test</Button>
+            <Button Click="Button_Make">Historia testów</Button>
+            <Button Click="Button_Back">Powrót</Button>
+        </StackPanel>
+
+        <StackPanel Visibility="Hidden" Name="StackMakeTest">
+            <Label Name="LabelLangSelected3"></Label>
+            <Label>Jaki rodzaj testu:</Label>
+            <Button Click="Button_Make">Losowy</Button>
+            <Button Click="Button_Make">Kategoria</Button>
             <Button Click="Button_Back">Powrót</Button>
         </StackPanel>
     </Grid>
