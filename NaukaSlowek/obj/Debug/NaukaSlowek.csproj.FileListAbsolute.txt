@@ -17,5 +17,15 @@ C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.csproj.Gener
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.csproj.CoreCompileInputs.cache
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.exe
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.pdb
-C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\SelectTest.g.cs
-C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\SelectTest.baml
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\Settings.g.cs
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\EntityFramework.dll
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.dll
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\EntityFramework.xml
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.xml
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\Settings.baml
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.csproj.CopyComplete

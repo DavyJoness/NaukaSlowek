@@ -19,6 +19,8 @@ namespace NaukaSlowek
     {
         public string SimpleWord { get; set; }
         public string Translate { get; set; }
+        public string Category { get; set; }
+        public string Part { get; set; }
 
     }
     public partial class CreateTest : Window
@@ -65,14 +67,26 @@ namespace NaukaSlowek
                 column = new DataGridTextColumn();
                 column.Header = "Słówko";
                 column.IsReadOnly = false;
-                column.Width =  new DataGridLength(50, DataGridLengthUnitType.Star);
+                column.Width =  new DataGridLength(25, DataGridLengthUnitType.Star);
                 column.Binding = new Binding("SimpleWord");
                 GridWords.Columns.Add(column);
 
                 column = new DataGridTextColumn();
                 column.Header = "Tłumaczenie";
-                column.Width = new DataGridLength(50, DataGridLengthUnitType.Star);
+                column.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
                 column.Binding = new Binding("Translate");
+                GridWords.Columns.Add(column);
+
+                column = new DataGridTextColumn();
+                column.Header = "Kategoria";
+                column.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
+                column.Binding = new Binding("Category");
+                GridWords.Columns.Add(column);
+
+                column = new DataGridTextColumn();
+                column.Header = "Cz. mowy";
+                column.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
+                column.Binding = new Binding("Part");
                 GridWords.Columns.Add(column);
 
                 GridWords.DataContext = TableWords.DefaultView;
@@ -146,18 +160,18 @@ namespace NaukaSlowek
             return "";
         }
 
-        private void ButtonOpenTest_Click(object sender, RoutedEventArgs e)
-        {
-            SelectTest st = new SelectTest();
+        //private void ButtonOpenTest_Click(object sender, RoutedEventArgs e)
+        //{
+        //    SelectTest st = new SelectTest();
 
-            if (st.ShowDialog() == true)
-            {
-                prepareGrid(true);
-                //TextBoxTitle.Text = st.selectedTest.Item1;
+        //    if (st.ShowDialog() == true)
+        //    {
+        //        prepareGrid(true);
+        //        //TextBoxTitle.Text = st.selectedTest.Item1;
 
-                loadWords(st.selectedTest.Item2);
-            }
-        }
+        //        loadWords(st.selectedTest.Item2);
+        //    }
+        //}
 
         private void loadWords(string file)
         {

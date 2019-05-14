@@ -22,6 +22,7 @@ namespace NaukaSlowek
     {
         public enum Lang
         {
+            None,
             English,
             French,
             Latin
@@ -143,7 +144,5 @@ namespace NaukaSlowek
             mw = this;
             et.Show();
         }
-
-
     }
 }

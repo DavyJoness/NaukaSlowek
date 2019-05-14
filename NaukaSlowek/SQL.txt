@@ -1,0 +1,35 @@
+create table Languages
+(
+lan_id int primary key,
+lan_name varchar(32),
+lan_translate varchar(32)
+)
+
+create table Parts
+(
+par_id int primary key,
+par_lanid int,
+par_name varchar(64),
+foreign key (par_lanid) references Languages(lang_id)
+)
+
+create table Categories
+(
+cat_id primary key,
+cat_lanid int,
+cat_name varchar(64),
+foreign key (cat_lanid) references Languages(lan_id)
+)
+
+create table Words
+(
+word_id int primary key,
+word_lanid int,
+word_parid int,
+word_catid int,
+word_value varchar(128),
+word_translate varchar(128),
+foreign key (word_lanid) references Languages(lan_id),
+foreign key (word_parid) references Parts(par_id),
+foreign key (word_catid) references Categories(cat_id)
+)
