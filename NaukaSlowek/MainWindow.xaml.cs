@@ -35,7 +35,7 @@ namespace NaukaSlowek
         }
 
         public int page = 0;
-        public Lang lang;
+        public static Lang lang;
         public Option option;
         public static MainWindow mw;
 

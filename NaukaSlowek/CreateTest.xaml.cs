@@ -27,6 +27,8 @@ namespace NaukaSlowek
     {
         DataTable TableWords;
         public List<Word> words = new List<Word>();
+        private List<string> parts = new List<string>() { "part1", "part2" };
+        private List<string> categories = new List<string>() { "cat1", "cat2" };
 
         public CreateTest()
         {
@@ -59,6 +61,7 @@ namespace NaukaSlowek
             else
             { 
                 DataGridTextColumn column;
+                DataGridComboBoxColumn column_c;
 
                 TableWords = new DataTable();
                 GridWords.AutoGenerateColumns = false;
@@ -77,17 +80,19 @@ namespace NaukaSlowek
                 column.Binding = new Binding("Translate");
                 GridWords.Columns.Add(column);
 
-                column = new DataGridTextColumn();
-                column.Header = "Kategoria";
-                column.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
-                column.Binding = new Binding("Category");
-                GridWords.Columns.Add(column);
+                column_c = new DataGridComboBoxColumn();
+                column_c.Header = "Kategoria";
+                column_c.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
+                column_c.SelectedValueBinding = new Binding("Category");
+                column_c.ItemsSource = categories;
+                GridWords.Columns.Add(column_c);
 
-                column = new DataGridTextColumn();
-                column.Header = "Cz. mowy";
-                column.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
-                column.Binding = new Binding("Part");
-                GridWords.Columns.Add(column);
+                column_c = new DataGridComboBoxColumn();
+                column_c.Header = "Cz. mowy";
+                column_c.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
+                column_c.SelectedValueBinding = new Binding("Part");
+                column_c.ItemsSource = parts;
+                GridWords.Columns.Add(column_c);
 
                 GridWords.DataContext = TableWords.DefaultView;
             }
@@ -104,61 +109,61 @@ namespace NaukaSlowek
             }
         }
 
-        private void ButtonSaveTest_Click(object sender, RoutedEventArgs e)
-        {
-            string testName = "";//TextBoxTitle.Text;
-            if(testName != "")
-            {
-                string path = getLangPath() + @"\" + testName + ".csv";
+        //private void ButtonSaveTest_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string testName = "";//TextBoxTitle.Text;
+        //    if(testName != "")
+        //    {
+        //        string path = getLangPath() + @"\" + testName + ".csv";
 
-                //if test exists delete
-                if (File.Exists(path))
-                {
-                    File.Delete(path);
-                }
+        //        //if test exists delete
+        //        if (File.Exists(path))
+        //        {
+        //            File.Delete(path);
+        //        }
 
-                try
-                {
-                    using (StreamWriter outputFile = new StreamWriter(path, true))
-                    {
-                        foreach (Word w in words)
-                        {
-                            string line = testName + ";" + w.SimpleWord + ";" + w.Translate;
-                            outputFile.WriteLine(line);
-                        }
+        //        try
+        //        {
+        //            using (StreamWriter outputFile = new StreamWriter(path, true))
+        //            {
+        //                foreach (Word w in words)
+        //                {
+        //                    string line = testName + ";" + w.SimpleWord + ";" + w.Translate;
+        //                    outputFile.WriteLine(line);
+        //                }
 
-                    }
-                    if (MessageBox.Show("Test poprawnie zapisany. Czy chcesz utworzyc nowy?", "Nauka słówek", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-                    {
-                        //Nowy test
-                        prepareGrid(true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Problem podczas zapisywania testu:" + Environment.NewLine + ex.Message, "Nauka słówek", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Tytuł testu nie może być pusty", "Nauka słówek", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            }
-        }
+        //            }
+        //            if (MessageBox.Show("Test poprawnie zapisany. Czy chcesz utworzyc nowy?", "Nauka słówek", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+        //            {
+        //                //Nowy test
+        //                prepareGrid(true);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Problem podczas zapisywania testu:" + Environment.NewLine + ex.Message, "Nauka słówek", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Tytuł testu nie może być pusty", "Nauka słówek", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+        //    }
+        //}
 
-        public string getLangPath()
-        {
-            switch (MainWindow.mw.lang)
-            {
-                case MainWindow.Lang.English:
-                    return "Eng";
-                case MainWindow.Lang.French:
-                    return "Fre";
-                case MainWindow.Lang.Latin:
-                    return "Lat";
-            }
+        //public string getLangPath()
+        //{
+        //    switch (MainWindow.mw.lang)
+        //    {
+        //        case MainWindow.Lang.English:
+        //            return "Eng";
+        //        case MainWindow.Lang.French:
+        //            return "Fre";
+        //        case MainWindow.Lang.Latin:
+        //            return "Lat";
+        //    }
 
-            return "";
-        }
+        //    return "";
+        //}
 
         //private void ButtonOpenTest_Click(object sender, RoutedEventArgs e)
         //{
@@ -173,25 +178,55 @@ namespace NaukaSlowek
         //    }
         //}
 
-        private void loadWords(string file)
+        //private void loadWords(string file)
+        //{
+        //    string path = getLangPath() + @"\" + file;
+        //    Word word;
+
+        //    using (StreamReader sr = new StreamReader(path))
+        //    {
+        //        while (!sr.EndOfStream)
+        //        {
+        //            string line = sr.ReadLine();
+        //            word = new Word();
+        //            word.SimpleWord = line.Split(';')[1];
+        //            word.Translate = line.Split(';')[2];
+
+        //            words.Add(word);
+        //        }
+        //    }
+        //    GridWords.ItemsSource = null;
+        //    GridWords.ItemsSource = words;
+        //}
+
+        private void SettingsParts(object sender, RoutedEventArgs e)
         {
-            string path = getLangPath() + @"\" + file;
-            Word word;
-
-            using (StreamReader sr = new StreamReader(path))
+            try
             {
-                while (!sr.EndOfStream)
+                Settings settings = new Settings(Settings.SettingType.Parts);
+                settings.ShowDialog();
+                if (settings.DialogResult.HasValue && settings.DialogResult.Value)
                 {
-                    string line = sr.ReadLine();
-                    word = new Word();
-                    word.SimpleWord = line.Split(';')[1];
-                    word.Translate = line.Split(';')[2];
 
-                    words.Add(word);
                 }
             }
-            GridWords.ItemsSource = null;
-            GridWords.ItemsSource = words;
+            catch (Exception ex)
+            { }
+        }
+
+        private void SettingsCategories_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Settings settings = new Settings(Settings.SettingType.Categories);
+                settings.ShowDialog();
+                if (settings.DialogResult.HasValue && settings.DialogResult.Value)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }

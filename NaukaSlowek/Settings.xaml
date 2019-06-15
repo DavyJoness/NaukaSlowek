@@ -9,11 +9,11 @@
     <Grid>
         <DockPanel>
             <StackPanel Margin="10 10 0 10" DockPanel.Dock="Left" Width="200">
-                <DataGrid x:Name="GridValues" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False"></DataGrid>
+                <DataGrid x:Name="GridValues" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False"></DataGrid>
             </StackPanel>
             <StackPanel Margin="10 10 10 10" DockPanel.Dock="Right">
                 <Button x:Name="ButtonApply" Click="ButtonApply_Click">Zatwierdź</Button>
-                <Button x:Name="ButtonCancel" Margin="0 15 0 0">Anuluj</Button>
+                <Button x:Name="ButtonCancel" Margin="0 15 0 0" Click="ButtonCancel_Click">Anuluj</Button>
             </StackPanel>
         </DockPanel>
     </Grid>

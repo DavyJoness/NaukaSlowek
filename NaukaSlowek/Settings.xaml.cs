@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,12 @@ namespace NaukaSlowek
     /// Interaction logic for SelectTest.xaml
     /// </summary>
     /// 
+    public class Item
+    {
+        public int Id { get; set; }
+        public int LanId { get; set; }
+        public string Value { get; set; }
+    }
 
     public partial class Settings : Window
     {
@@ -29,9 +36,10 @@ namespace NaukaSlowek
             Categories
         }
 
+        SQLiteConnection SQLiteConnection = new SQLiteConnection("Data Source=words.db");
         SettingType settingType;
-        public Tuple<string, string> selectedTest;
-        private DataTable tableTests;
+        List<Item> settingItems = new List<Item>();
+        private DataTable settingsTable;
 
         public Settings(SettingType s)
         {
@@ -42,31 +50,38 @@ namespace NaukaSlowek
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             getSettingValuesList();
-            //PrepareGrid();
+            PrepareGrid();
         }
 
         private void getSettingValuesList()
         {
-            throw new NotImplementedException();
+            if (settingType == SettingType.Parts)
+                GetParts();
+            else if (settingType == SettingType.Categories)
+                GetCategories();
+            else
+            {
+                this.DialogResult = false;
+                this.Close();
+            }
         }
 
-        //private void PrepareGrid()
-        //{
-        //    DataGridTextColumn column;
+        private void PrepareGrid()
+        {
+            DataGridTextColumn column;
 
-        //    tableTests = new DataTable();
-        //    GridValues.AutoGenerateColumns = false;
-        //    GridValues.ItemsSource = tests;
+            settingsTable = new DataTable();
+            GridValues.AutoGenerateColumns = false;
+            GridValues.ItemsSource = settingItems;
 
-        //    column = new DataGridTextColumn();
-        //    column.Header = "Testy";
-        //    column.Width = new DataGridLength(100, DataGridLengthUnitType.Star);
-        //    column.IsReadOnly = true;
-        //    column.Binding = new Binding("Name");
-        //    GridValues.Columns.Add(column);
+            column = new DataGridTextColumn();
+            column.Header = "Wartość";
+            column.Width = new DataGridLength(100, DataGridLengthUnitType.Star);
+            column.Binding = new Binding("Value");
+            GridValues.Columns.Add(column);
 
-        //    GridValues.DataContext = tableTests.DefaultView;
-        //}
+            GridValues.DataContext = settingsTable.DefaultView;
+        }
 
         //private void getTestList()
         //{
@@ -111,9 +126,190 @@ namespace NaukaSlowek
         //    }
         //}
 
+        private void GetParts()
+        {
+            SQLiteCommand oCommand = SQLiteConnection.CreateCommand();
+            SQLiteDataAdapter dataAdapter = null;
+            DataSet dataSet = null;
+            Item item;
+            string lanId = ((int)MainWindow.lang).ToString();
+            string query = $"select * from Parts where par_lanid = {lanId}";
+
+            try
+            {
+                SQLiteConnection.Open();
+                oCommand.CommandText = query;
+
+                dataAdapter = new SQLiteDataAdapter(oCommand.CommandText, SQLiteConnection);
+                SQLiteCommandBuilder oCommandBuilder = new SQLiteCommandBuilder(dataAdapter);
+                dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
+                foreach (DataRow dr in dataSet.Tables[0].Rows)
+                {
+                    item = new Item();
+                    item.Id = Convert.ToInt32(dr["par_id"]);
+                    item.LanId = Convert.ToInt32(dr["par_lanId"]);
+                    item.Value = dr["par_name"].ToString();
+
+                    settingItems.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Wystąpił błąd przy funkcji GetParts: {ex.Message}", "NaukaSłówek", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                SQLiteConnection.Close();
+            }
+        }
+
+        private void GetCategories()
+        {
+            SQLiteCommand oCommand = SQLiteConnection.CreateCommand();
+            SQLiteDataAdapter dataAdapter = null;
+            DataSet dataSet = null;
+            Item item;
+            string lanId = ((int)MainWindow.lang).ToString();
+            string query = $"select * from Categories where cat_lanId = {lanId}";
+
+            try
+            {
+                SQLiteConnection.Open();
+                oCommand.CommandText = query;
+
+                dataAdapter = new SQLiteDataAdapter(oCommand.CommandText, SQLiteConnection);
+                SQLiteCommandBuilder oCommandBuilder = new SQLiteCommandBuilder(dataAdapter);
+                dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
+                foreach (DataRow dr in dataSet.Tables[0].Rows)
+                {
+                    item = new Item();
+                    item.Id = Convert.ToInt32(dr["cat_id"]);
+                    item.LanId = Convert.ToInt32(dr["cat_lanId"]);
+                    item.Value = dr["cat_name"].ToString();
+
+                    settingItems.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Wystąpił błąd przy funkcji GetCategories: {ex.Message}", "NaukaSłówek", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                SQLiteConnection.Close();
+            }
+        }
+
+        private bool SetParts()
+        {
+            bool res = true;
+
+            SQLiteCommand oCommand = SQLiteConnection.CreateCommand();
+            string query = queryPrepare();
+
+            try
+            {
+                SQLiteConnection.Open();
+                oCommand.CommandText = query;
+                oCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Wystąpił błąd przy funkcji SetParts: {ex.Message}", "NaukaSłówek", MessageBoxButton.OK, MessageBoxImage.Error);
+                res = false;
+            }
+            finally
+            {
+                SQLiteConnection.Close();
+            }
+
+            return res;
+        }
+
+        private string queryPrepare()
+        {
+            string query = "";
+            string lanId = ((int)MainWindow.lang).ToString();
+
+            if (settingType == SettingType.Parts)
+            {
+                query = $@"delete from Parts where par_lanid = {lanId}
+insert into Parts(par_lanid, par_value)
+values ";
+
+                foreach (Item i in settingItems)
+                {
+                    string s = $"({i.LanId}, {i.Value}),";
+                    query += s;
+                }
+
+                query = query.Substring(0, query.Length - 1);
+            }
+            else if (settingType == SettingType.Categories)
+            {
+                query = $@"delete from Categories where cat_lanid = {lanId}
+insert into Categories(cat_lanid, cat_value)
+values ";
+
+                foreach (Item i in settingItems)
+                {
+                    string s = $"({i.LanId}, {i.Value}),";
+                    query += s;
+                }
+
+                query = query.Substring(0, query.Length - 1);
+            }
+
+            return query;
+        }
+
+        private bool SetCategories()
+        {
+            bool res = true;
+
+            SQLiteCommand oCommand = SQLiteConnection.CreateCommand();
+            string query = "";
+
+            try
+            {
+                SQLiteConnection.Open();
+                oCommand.CommandText = query;
+                oCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Wystąpił błąd przy funkcji SetCategories: {ex.Message}", "NaukaSłówek", MessageBoxButton.OK, MessageBoxImage.Error);
+                res = false;
+            }
+            finally
+            {
+                SQLiteConnection.Close();
+            }
+
+            return res;
+        }
+
         private void ButtonApply_Click(object sender, RoutedEventArgs e)
         {
+            if (settingType == SettingType.Parts)
+                SetParts();
+            else if (settingType == SettingType.Categories)
+                SetCategories();
+            else
+            {
+                this.DialogResult = false;
+                this.Close();
+            }
+        }
 
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }

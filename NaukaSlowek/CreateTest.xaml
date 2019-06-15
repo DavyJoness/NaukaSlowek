@@ -18,12 +18,12 @@
             </DockPanel>
             <StackPanel Margin="10">
                 <Label x:Name="LabelSettings" Content="Ustawienia" />
-                <Button x:Name="ButtonNewTest">Części mowy</Button>
-                <Button x:Name="ButtonOpenTest">Kategorie</Button>
+                <Button x:Name="ButtonParts" Click="SettingsParts">Części mowy</Button>
+                <Button x:Name="ButtonCategories" Click="SettingsCategories_Click">Kategorie</Button>
                 <!--<Button x:Name="ButtonSaveTest" Click="ButtonSaveTest_Click">Zapisz test</Button>-->
 
                 <Label x:Name="LabelEdit" Content="Edycja" />
-                <Button x:Name="ButtonDeleteWord">Usuń słówko</Button>
+                <Button x:Name="ButtonDeleteWord" Click="ButtonDeleteWord_Click">Usuń słówko</Button>
                 
             </StackPanel>
             
