@@ -5,11 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NaukaSlowek"
         mc:Ignorable="d"
-        Title="Ustawienia" Height="450" Width="300" Loaded="Window_Loaded">
+        Title="Ustawienia" Height="450" Width="350" Loaded="Window_Loaded">
     <Grid>
-        <DockPanel>
-            <StackPanel Margin="10 10 0 10" DockPanel.Dock="Left" Width="200">
-                <DataGrid x:Name="GridValues" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False"></DataGrid>
+        <DockPanel LastChildFill="True">
+            <StackPanel Margin="10 10 0 10"  Width="200">
+                <TabPanel Margin="0 0 0 10">
+                    <TextBox x:Name="TextBoxNewItem" Width="180"/>
+                    <Button x:Name="ButtonAdd" Width="20" Click="ButtonAdd_Click">+</Button>
+                </TabPanel>
+                <DataGrid Name="GridValues" ItemsSource="{Binding settingItems}" CanUserResizeColumns="false" CanUserReorderColumns="False" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Wartość" Binding="{Binding Value}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
             <StackPanel Margin="10 10 10 10" DockPanel.Dock="Right">
                 <Button x:Name="ButtonApply" Click="ButtonApply_Click">Zatwierdź</Button>

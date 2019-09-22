@@ -29,3 +29,5 @@ C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.xml
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\Settings.baml
 C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\obj\Debug\NaukaSlowek.csproj.CopyComplete
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\Dapper.dll
+C:\Users\kielp\GitHub\NaukaSlowek\NaukaSlowek\bin\Debug\Dapper.xml
