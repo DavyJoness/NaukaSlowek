@@ -1,0 +1,44 @@
+﻿<Window x:Class="NaukaSlowek.CreateTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NaukaSlowek"
+        mc:Ignorable="d"
+        Title="Nauka Słówek - Lista" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <DockPanel DockPanel.Dock="Left" Width="450" Margin="10" LastChildFill="True">
+
+                <DataGrid Name="GridWords" ItemsSource="{Binding words}" CanUserResizeColumns="false" CanUserReorderColumns="False" CanUserAddRows="True" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Słówko" Binding="{Binding SimpleWord}" Width="*"/>
+                        <DataGridTextColumn Header="Tłumaczenie" Binding="{Binding Translate}" Width="*"/>
+                        <DataGridComboBoxColumn x:Name="ComboBoxColumnCategory"
+                            Header="Kategoria" Width="*"
+                            SelectedItemBinding="{Binding categories}">
+                        </DataGridComboBoxColumn>
+                        <DataGridComboBoxColumn x:Name="ComboBoxColumnParts"
+                            Header="Część" Width="*"
+                            SelectedItemBinding="{Binding parts}">
+                        </DataGridComboBoxColumn>
+                        <!--<DataGridComboBoxColumn Header="Kategoria" Width="*" ItemsSource="{Binding sss}"/>-->
+                        <!--<DataGridComboBoxColumn Header="Cz. mowy" Width="*" SelectedValueBinding="{Binding Part}" DisplayMemberPath="parts" />-->
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+            <StackPanel Margin="10">
+                <Label x:Name="LabelSettings" Content="Ustawienia" />
+                <Button x:Name="ButtonParts" Click="SettingsParts">Części mowy</Button>
+                <Button x:Name="ButtonCategories" Click="SettingsCategories_Click">Kategorie</Button>
+                <!--<Button x:Name="ButtonSaveTest" Click="ButtonSaveTest_Click">Zapisz test</Button>-->
+
+                <Label x:Name="LabelEdit" Content="Edycja" />
+                <Button x:Name="ButtonInsertWords" Click="ButtonInsertWords_Click">Dodaj nowe słówka</Button>
+                <Button x:Name="ButtonDeleteWord" Click="ButtonDeleteWord_Click">Usuń słówko</Button>
+                
+            </StackPanel>
+            
+        </DockPanel>
+    </Grid>
+</Window>
