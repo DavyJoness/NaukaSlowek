@@ -16,11 +16,11 @@
                         <DataGridTextColumn Header="Tłumaczenie" Binding="{Binding Translate}" Width="*"/>
                         <DataGridComboBoxColumn x:Name="ComboBoxColumnCategory"
                             Header="Kategoria" Width="*"
-                            SelectedItemBinding="{Binding categories}">
+                            SelectedItemBinding="{Binding Category}">
                         </DataGridComboBoxColumn>
                         <DataGridComboBoxColumn x:Name="ComboBoxColumnParts"
                             Header="Część" Width="*"
-                            SelectedItemBinding="{Binding parts}">
+                            SelectedItemBinding="{Binding Part}">
                         </DataGridComboBoxColumn>
                         <!--<DataGridComboBoxColumn Header="Kategoria" Width="*" ItemsSource="{Binding sss}"/>-->
                         <!--<DataGridComboBoxColumn Header="Cz. mowy" Width="*" SelectedValueBinding="{Binding Part}" DisplayMemberPath="parts" />-->
